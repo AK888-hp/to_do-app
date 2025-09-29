@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App with Vue.js</title>
+    <link rel=""stylesheet" href="/static/css/style.css">
+    <script src="https:/unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    {% raw %}
+    <div id="app" class="container">
+          <nav>
+            <router-link to="/">Home</router-link>
+            <router-link to="/about">About</router-link>
+        </nav>
+         <router-view></router-view>
+        <header>
+            <h1>
+                My Tasks
+            </h1>
+
+            <form @submit.prevent = "addTask">
+                <input
+                type = "text"
+                v-model = "newTaskTitle"
+                placeholder="What needs to be done?"
+                >
+                <button type = "submit">Add Task</button>
+            </form>
+        </header>
+
+        <main>
+            <p v-if="tasks.length === 0" class="empty-message">You have no tasks yet</p>
+            <div v-for="task in tasks" :key="task.id" class="task-item" :class="{'completed':task.is_completed}">
+                <div class="task-details">
+                    <input
+                    type = "checkbox"
+                    :checked="task.is_completed"
+                    @change="toggleTask(task)"
+                    >
+                    <span>{{ task.title }}</span>
+                </div>
+                <button @click="deleteTask(task.id)" class="delete-btn">Delete</button>
+            </div>
+        </main>
+    </div>
+    {% endraw %}
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
