@@ -1,6 +1,4 @@
 const { createApp } = Vue;
-const { createRouter, createWebHashHistory } = VueRouter;
-
 // --- 1. Define Our Page Components ---
 
 // The "Home" page component
@@ -154,8 +152,8 @@ const routes = [
 ];
 
 // --- 3. Create The Router Instance ---
-const router = createRouter({
-    history: createWebHashHistory(),
+const router = VueRouter.createRouter({
+    history: VueRouter.createWebHashHistory(),
     routes, 
 });
 
