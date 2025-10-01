@@ -1,11 +1,161 @@
-body {font-family: sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 2rem; }
-.container {max-width: 600px; margin: 0 auto; background-color: #fff; padding:2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);}
-h1 { text-align: center; color:#2c3e50;}
-form {display: flex;margin-bottom: 2rem;}
-input[type="text"] {flex-grow:1; border: 2px solid #ddd; padding: 0.75rem; border-radius:4px; font-size: 1rem;}
-button {border:none; background-color: #42b983; color: white;padding: 0.75rem 1.5rem;border-radius:4px; cursor: pointer;font-weight: bold;margin-left: 0.5rem;}
-.task-item {display:flex;align-items: center; justify-content: space-between;padding:1rem;border-bottom: 1px solid #eee;}
-.task-details {display:flex;align-items: center;gap:1rem;}
-.task-item.completed span {text-decoration: line-through;color:#999;}
-.delete-btn {background-color: #e74c3c;opacity: 0.5;transition: opacity 0.2s;}
-.task-item:hover .delete-btn {opacity: 1;}
+/* General Body and Font Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+    margin: 0;
+    padding: 1rem;
+}
+
+/* Main App Container */
+.container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+/* Card Style for Sections */
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Navigation Bar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+nav h1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #2563eb;
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+nav a:hover, .router-link-active {
+    background-color: #e5e7eb;
+}
+
+/* Form Styles */
+.task-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+/* Form inputs and select */
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Important for consistent sizing */
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.primary-button {
+    background-color: #2563eb;
+    color: white;
+    font-weight: bold;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 1rem;
+}
+
+.primary-button:hover {
+    background-color: #1d4ed8;
+}
+
+/* Task List Styles */
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 5px solid; /* For priority color */
+    margin-bottom: 1rem;
+    transition: background-color 0.2s;
+}
+
+.task-details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.task-item.completed span {
+    text-decoration: line-through;
+    color: #9ca3af;
+}
+
+.task-item .due-date {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.delete-button {
+    background-color: #ef4444;
+    color: white;
+    font-weight: bold;
+    padding: 0.25rem 0.75rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.2s, background-color 0.2s;
+}
+
+.task-item:hover .delete-button {
+    opacity: 1; /* Show on hover */
+}
+
+.delete-button:hover {
+    background-color: #dc2626;
+}
+
+/* Priority Color Classes */
+.priority-high { background-color: #fee2e2; border-color: #ef4444; }
+.priority-medium { background-color: #fef3c7; border-color: #f59e0b; }
+.priority-low { background-color: #dcfce7; border-color: #22c55e; }
+
+/* Responsive Design */
+@media (min-width: 640px) {
+    .task-form {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+    .form-submit-area {
+        grid-column: 1 / -1; /* Span all columns */
+    }
+}

@@ -2,6 +2,7 @@ from fastapi import APIRouter,HTTPException
 from pydantic import BaseModel
 from enum import Enum
 from typing import Optional
+from datetime import date
 
 router = APIRouter()
 
@@ -15,6 +16,8 @@ class Priority(str,Enum):
 class TaskCreate(BaseModel):
     title: str
     is_completed : bool = False
+    priority: Priority = Priority.medium
+    due_date:Optional[date] = None
 
 class Task(TaskCreate):
     id:int
@@ -22,8 +25,8 @@ class Task(TaskCreate):
 # ---IN-MEMORY DATABASE---
 
 tasks_db = [
-    Task(id=1, title="Learn Python",is_completed=True),
-    Task(id=2, title="Learn Vue.js",is_completed=False),
+    Task(id=1, title="Learn Python",is_completed=True, priority=Priority.high, due_date=date(2025, 10, 5)),
+    Task(id=2, title="Learn Vue.js",is_completed=False, priority=Priority.low, due_date=date(2025, 10, 5)),
 ]
 
 current_id = 2
@@ -53,6 +56,8 @@ def update_task(task_id:int,task_data:TaskCreate):
     task_to_update = find_task_or_404(task_id)
     task_to_update.title = task_data.title
     task_to_update.is_completed = task_data.is_completed
+    task_to_update.priority = task_data.priority
+    task_to_update.due_date = task_data.due_date
     return task_to_update
 
 @router.delete("/api/tasks/{task_id}",status_code=204)
